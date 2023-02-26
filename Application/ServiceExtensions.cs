@@ -12,7 +12,7 @@ namespace Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             // registra automaticamente los mappeos que se hagan en esta biblioteca de clase
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            
 
         }
     }

@@ -1,4 +1,8 @@
 using Application;
+using Persistence;
+using Shared;
+using System.Reflection;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationLayer();// esta conecta a services de aplication para poder usar los que matricule en ese lugar
+builder.Services.AddPersistenceInfraestructure(builder.Configuration);
+builder.Services.AddSharedInfraEstructure(builder.Configuration);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseErrorHandlingMiddleware();
 app.MapControllers();
 
 app.Run();
