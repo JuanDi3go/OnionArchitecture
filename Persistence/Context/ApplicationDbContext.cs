@@ -29,6 +29,8 @@ namespace Persistence.Context
                 {
                     case EntityState.Added:
                         entry.Entity.Created = _dateTime.NowUtc;
+                        entry.Entity.CreatedBy = "Juan";
+                        entry.Entity.LastModifiedBy = "Juan"; //este no eran campos requeridos yo cometi un error
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = _dateTime.NowUtc;

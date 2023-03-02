@@ -7,6 +7,7 @@ using Persistence.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,9 @@ namespace Persistence
 
             #region Repositories 
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            #endregion
+            #region caching
+            services.AddStackExchangeRedisCache(options => options.Configuration = configuration.GetValue<string>("Caching:RedisConnection"));
             #endregion
         }
     }
